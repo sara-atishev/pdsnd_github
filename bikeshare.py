@@ -196,6 +196,22 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def raw_data(df):
+        start_index = 0
+        end_index = 5
+        while True:
+            raw_lines = input('\nWould you like to see 5 lines of raw data?\n')
+            if raw_lines.lower() == "yes":
+                if end_index >= len(df):
+                    print("You reached the end of the dataframe. Stopping")
+                    break
+                print(df[start_index:end_index])
+                start_index +=5
+                end_index += 5
+            elif raw_lines.lower() == "no":
+                break
+            else:
+                print('\nI didn\'t understand your input, please input "yes" or "no" \n')
 
 def main():
     while True:
@@ -206,28 +222,11 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-
-        start_index = 0
-        end_index = 5
-        while True:
-            raw_data = input('\nWould you like to see 5 lines of raw data?\n')
-            if raw_data.lower() == "yes":
-                if end_index >= len(df):
-                    print("You reached the end of the dataframe. Stopping")
-                    break
-                print(df[start_index:end_index])
-                start_index +=5
-                end_index += 5
-            elif raw_data.lower() == "no":
-                break
-            else:
-                print('\nI didn\'t understand your input, please input "yes" or "no" \n')
+        raw_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
 
 if __name__ == "__main__":
 	main()
