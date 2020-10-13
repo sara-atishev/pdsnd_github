@@ -13,7 +13,7 @@ days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'satur
 
 def get_filters():
     """
-    Asks user to specify a city, month, and day to analyze.
+    Asks user to specify a city, month, and day by which to filter the bikeshare data.
 
     Returns:
         (str) city - name of the city to analyze
@@ -22,10 +22,10 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!\n')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-        
+
     while True:
         city = input('\nWhich city would you like to see data for: Chicago, New York City, or Washington?\n').lower()
-        
+
         if city in cities:
             print('\nWe will be looking at data for {}.\n'.format(city.title()))
             break
@@ -34,19 +34,19 @@ def get_filters():
             city = input('\nWhich city would you like to see data for: Chicago, New York City, or Washington?\n').lower()
 
     # TO DO: get user input for month (all, january, february, ... , june)
-   
+
     while True:
         month = input('\nWhat month would you like to see data for: January, February, March, April, May, June, or All?\n').lower()
 
         if month in months:
             print('\nYou\'ve requested data for {}.\n'.format(month.title()))
             break
-        else:      
+        else:
             print('\nI\'m sorry, that\'s not a valid month. Please request data from January, February, March, April, May, June, or All.\n')
             month = input('\nWhat month would you like to see data for: January, February, March, April, May, June, or All?\n').lower
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-   
+
     while True:
         day = input('\nWhat day of the week would you like to see data for: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or All?\n').lower()
 
@@ -87,7 +87,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -95,7 +95,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-    
+
     return df
 
 def time_stats(df):
@@ -134,7 +134,7 @@ def station_stats(df):
     # TO DO: display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
     print('\nMost Popular End Station:\n',popular_end_station)
-   
+
     # TO DO: display most frequent combination of start station and end station trip
     popular_station_combo = (df['Start Station'] + ' ' + 'to' + ' ' + df['End Station']).mode()
     print('\nMost Popular Start Station to End Station Combination:\n',popular_station_combo)
@@ -148,7 +148,7 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     def convert(seconds):
         seconds_per_day = 60 * 60 * 24
         if seconds < seconds_per_day:
@@ -158,12 +158,12 @@ def trip_duration_stats(df):
         return str(days) + " day(s), " + time.strftime("%H:%M:%S", time.gmtime(seconds_without_days))
     # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
-    
+
     print('\nTotal Trip Time, in Seconds:\n', convert(total_travel_time))
 
     # TO DO: display mean travel time
     average_travel_time = df['Trip Duration'].mean()
-           
+
     print('\nAverage Trip Time:\n', convert(average_travel_time))
 
     print("\nThis took %s seconds.\n" % (time.time() - start_time))
@@ -206,12 +206,12 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
-        
+
+
         start_index = 0
         end_index = 5
         while True:
-            raw_data = input('\nWould you like to see 5 lines of raw data?\n')   
+            raw_data = input('\nWould you like to see 5 lines of raw data?\n')
             if raw_data.lower() == "yes":
                 if end_index >= len(df):
                     print("You reached the end of the dataframe. Stopping")
@@ -222,8 +222,8 @@ def main():
             elif raw_data.lower() == "no":
                 break
             else:
-                print('\nI didn\'t understand your input, please input "yes" or "no" \n')  
-            
+                print('\nI didn\'t understand your input, please input "yes" or "no" \n')
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
