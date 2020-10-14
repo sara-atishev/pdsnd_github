@@ -16,4 +16,4 @@ This project used the following files:
 * washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+**A big thank you to Stack Overflow and its contributors for all the great questions and tips!**
