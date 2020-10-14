@@ -27,7 +27,7 @@ def get_filters():
         city = input('\nWhich city would you like to see data for: Chicago, New York City, or Washington?\n').lower()
 
         if city in cities:
-            print('\nWe will be looking at data for {}.\n'.format(city.title()))
+            print('\nWe will be looking at data for:\n', city.title())
             break
         else:
             print('\nI\'m sorry, I don\'t recognize that city. Remember, I only have data for Chicago, New York City, and Washington. Please try again.\n')
@@ -39,7 +39,7 @@ def get_filters():
         month = input('\nWhat month would you like to see data for: January, February, March, April, May, June, or All?\n').lower()
 
         if month in months:
-            print('\nYou\'ve requested data for {}.\n'.format(month.title()))
+            print('\nYou\'ve requested data for:\n', month.title())
             break
         else:
             print('\nI\'m sorry, that\'s not a valid month. Please request data from January, February, March, April, May, June, or All.\n')
@@ -51,7 +51,7 @@ def get_filters():
         day = input('\nWhat day of the week would you like to see data for: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or All?\n').lower()
 
         if day in days:
-            print('\nWe\'ll look at data on {}.\n'.format(day.title()))
+            print('\nWe\'ll look at data on:\n', day.title())
             break
         else:
             print('\nI\'m sorry, that\'s not a valid day. Please enter a day of the week or all to see data from all days.\n')
