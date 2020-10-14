@@ -27,7 +27,7 @@ def get_filters():
         city = input('\nWhich city would you like to see data for: Chicago, New York City, or Washington?\n').lower()
 
         if city in cities:
-            print('\nWe will be looking at data for {}.\n'.format(city.title()))
+            print('\nWe will be looking at data for:\n', city.title())
             break
         else:
             print('\nI\'m sorry, I don\'t recognize that city. Remember, I only have data for Chicago, New York City, and Washington. Please try again.\n')
@@ -39,7 +39,7 @@ def get_filters():
         month = input('\nWhat month would you like to see data for: January, February, March, April, May, June, or All?\n').lower()
 
         if month in months:
-            print('\nYou\'ve requested data for {}.\n'.format(month.title()))
+            print('\nYou\'ve requested data for:\n', month.title())
             break
         else:
             print('\nI\'m sorry, that\'s not a valid month. Please request data from January, February, March, April, May, June, or All.\n')
@@ -51,7 +51,7 @@ def get_filters():
         day = input('\nWhat day of the week would you like to see data for: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or All?\n').lower()
 
         if day in days:
-            print('\nWe\'ll look at data on {}.\n'.format(day.title()))
+            print('\nWe\'ll look at data on:\n', day.title())
             break
         else:
             print('\nI\'m sorry, that\'s not a valid day. Please enter a day of the week or all to see data from all days.\n')
@@ -136,7 +136,7 @@ def station_stats(df):
     print('\nMost Popular End Station:\n',popular_end_station)
 
     # TO DO: display most frequent combination of start station and end station trip
-    popular_station_combo = (df['Start Station'] + ' ' + 'to' + ' ' + df['End Station']).mode()
+    popular_station_combo = df.groupby(['Start Station','End Station']).size().nlargest(1)
     print('\nMost Popular Start Station to End Station Combination:\n',popular_station_combo)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -196,6 +196,22 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def raw_data(df):
+        start_index = 0
+        end_index = 5
+        while True:
+            raw_lines = input('\nWould you like to see 5 lines of raw data?\n')
+            if raw_lines.lower() == "yes":
+                if end_index >= len(df):
+                    print("You reached the end of the dataframe. Stopping")
+                    break
+                print(df[start_index:end_index])
+                start_index +=5
+                end_index += 5
+            elif raw_lines.lower() == "no":
+                break
+            else:
+                print('\nI didn\'t understand your input, please input "yes" or "no" \n')
 
 def main():
     while True:
@@ -206,28 +222,11 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-
-        start_index = 0
-        end_index = 5
-        while True:
-            raw_data = input('\nWould you like to see 5 lines of raw data?\n')
-            if raw_data.lower() == "yes":
-                if end_index >= len(df):
-                    print("You reached the end of the dataframe. Stopping")
-                    break
-                print(df[start_index:end_index])
-                start_index +=5
-                end_index += 5
-            elif raw_data.lower() == "no":
-                break
-            else:
-                print('\nI didn\'t understand your input, please input "yes" or "no" \n')
+        raw_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
 
 if __name__ == "__main__":
 	main()
