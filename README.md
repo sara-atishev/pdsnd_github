@@ -6,7 +6,7 @@ This README.md file was created on October 11, 2020
 # Explore US Bikeshare Data
 
 ### Description
-Describe what your project is about and what it does
+This project analyzes bikeshare data in 3 US cities: Chicago, New York City, and Washington. It looks at trip and user data to provide output such as most frequent start station and most common user birth year.
 
 ### Files used
 This project used the following files:
