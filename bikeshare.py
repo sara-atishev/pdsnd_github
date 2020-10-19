@@ -16,7 +16,7 @@ def get_filters():
     Asks user to specify a city, month, and day by which to filter the bikeshare data.
 
     Returns:
-        (str) city - name of the city to analyze (chicago, new york city, washington, or all)
+        (str) city - name of the city to analyze (chicago, new york city, washington), or "all" to see data for all cities
         (str) month - name of the month to filter by (january, february, ..., june), or "all" to apply no month filter
         (str) day - name of the day of week to filter by (monday, tuesday, ..., sunday), or "all" to apply no day filter
     """
